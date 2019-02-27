@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+{% block content %}
+
+
+
+
+    {% if examesPendentes %}
+    <h5>Exames Pendentes</h5>
+
+    <table border="1">
+    <thead>
+        <tr>
+        <th>Solicitado em</th>
+        <th>Tipo</th>
+        <th>Operação</th>
+        
+        </tr>
+    </thead>
+    <tbody>
+        {% for  exameSolicitado in examesPendentes  %}
+        <tr>
+        <td>{{ exameSolicitado.dtHoraSolic|date:"d M Y"  }}</td>
+        <td>{{ exameSolicitado.tipoExame.descricao}}</td>
+        <td><a href="/resultado_exame/{{ exameSolicitado.id}}">Enviar Resultado</a></td>
+        
+        <td</td>
+        
+            
+        </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+    {% else  %}
+    <p>Não há exames Concluidos</p>
+
+{% endif  %}
+
+<p></p>
+<p></p>
+
+
+
+<p></p>
+<p></p>
+
+
+{% if examesConcluidos %}
+    <h5>Exames Concluidos</h5>
+
+    <table border="1">
+    <thead>
+        <tr>
+        <th>Solicitado em</th>
+        <th>Tipo</th>
+        <th>Situacao</th>
+        <th>Laudo</th>
+        <th>Imagem</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for  exameSolicitado in examesConcluidos  %}
+        <tr>
+        <td>{{ exameSolicitado.dtHoraSolic|date:"d M Y"  }}</td>
+        <td>{{ exameSolicitado.tipoExame.descricao}}</td>
+        <td>{{ exameSolicitado.get_situacaoExame_display}}</td>
+        <td>{{ exameSolicitado.resultadoTexto}}</td>
+        <td align="center">
+            
+            <a href="/{{ exameSolicitado.resultadoImagem}}"> <img src="{%  static 'img/exame.png' %}" width="20" heigth="20"/></a>
+        
+        </td>
+
+
+        
+        
+        
+            
+        </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+    {% else  %}
+    <p>Não há exames Concluidos</p>
+
+{% endif  %}
+
+<p></p>
+<p></p>
+´
+
+
+    <p><a href="{% url 'home' %}">Página Inicial</a></p>
+	
+	
+
+{% endblock %}

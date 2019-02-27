@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+
+
+<h1>Fim de Atendimento</h1>
+<form method="post">{% csrf_token %}
+<div>
+
+    <p> Clique nos links abaixo para emitir os relatorios</p>
+
+
+
+    <p>
+    <a href="/pdf/consulta_receita_{{ form.consultaId.value }}.pdf" target="_blank">
+    <img border="0" alt="W3Schools" src="{% static 'img/download.png' %}"  width="30" height="30">
+    &nbsp;
+    &nbsp;
+    <a href="/pdf/consulta_receita_{{ form.consultaId.value }}.pdf" target="_blank" >Receituario</a>
+    </p>
+
+
+    <p>
+    <a href="/pdf/consulta_exames_{{ form.consultaId.value }}.pdf" target="_blank">
+    <img border="0" alt="W3Schools" src="{% static 'img/download.png' %}"  width="30" height="30">
+    &nbsp;
+    &nbsp;
+    <a href="/pdf/consulta_exames_{{ form.consultaId.value }}.pdf" target="_blank" >Exames</a>
+    </p>
+
+
+    
+
+    <p></p>
+    <p></p>
+
+
+    <strong><p><a href="{% url 'consulta_list' %}">Retornar</a></p></strong>
+
+    
+    
+
+    
+    
+
+
+  
+    
+  
+</div>
+</form>
+{% endblock %}

@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Cadastre-se e fique à vontade</h2>
+  <p class="lead">Selecione o Perfil que voce deseja Criar</p>
+  <a href="{% url 'paciente_signup' %}" class="btn btn-student btn-lg" role="button">Sou Paciente</a>
+  <a href="{% url 'medico_signup' %}" class="btn btn-teacher btn-lg" role="button">Sou Medico</a>
+{% endblock %}

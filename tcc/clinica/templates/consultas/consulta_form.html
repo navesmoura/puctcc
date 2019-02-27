@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<h1>Atendimento</h1>
+<form method="post">{% csrf_token %}
+    <p>Paciente <strong><a href="/prontuario_paciente/{{form.pacienteId.value}}" target="_blank" >{{form.paciente_f.value}}</a></strong> <i>Clique no paciente para acesso ao prontuário</i></p>
+    <p>Médico <strong>{{form.medico_f.value}}</strong></p>
+
+	<div class="accordion" id="accordionExample">
+	<div class="card">
+    <div class="card-header" id="headingOne">
+    <h2 class="mb-0">	
+	<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+    Queixa
+    </button>
+	</h2>
+    </div>
+	
+	<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+    <div class="card-body">
+    <p>Queixa do Paciente:</p>
+    <p>{{ form.queixa }}</p>
+    </div>
+    </div>
+	</div>
+	<div class="card">
+    <div class="card-header" id="headingTwo">
+    <h2 class="mb-0">
+    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+    Exames
+    </button>
+    </h2>
+    </div>
+    
+	<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+    <div class="card-body">
+    <p>{{ form.exames}}</p>
+    </div>
+    </div>
+	</div>
+	<div class="card">
+	<div class="card-header" id="headingThree">
+	<h2 class="mb-0">
+	<button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+	Medicamentos
+	</button>
+	</h2>
+	</div>
+	
+	<div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+	<div class="card-body">
+	<p>Medicamentos Disponiveis</p>
+	<p>{{ form.medicamentos}}</p>
+	<p>Receituario</p>
+	<p>{{ form.receituario}}</p>
+	</div>
+	</div>
+	</div>
+	</div>
+	
+    <p>
+    {{ form.non_field_errors }}
+    </p>
+
+    <p>Ao fim da consulta um arquivo PDF com a solicitação de Exames e prescrição de Medicamentos</p>
+    <input type="submit" class="btn btn-success"  value="Encerrar Consulta" />
+	{% if form.errors %}
+		{% for field in form %}
+			{% for error in field.errors %}
+				<div class="alert alert-danger">
+					<strong>{{ error|escape }}</strong>
+				</div>
+			{% endfor %}
+		{% endfor %}
+		{% for error in form.non_field_errors %}
+			<div class="alert alert-danger">
+				<strong>{{ error|escape }}</strong>
+			</div>
+		{% endfor %}
+	{% endif %}
+</form>
+<script>
+function addReceita(objeto) {
+document.getElementById("id_receituario").value  =
+document.getElementById("id_receituario").value  +
+document.getElementById("id_medicamentos").value   +   "\n\n";
+}
+</script>
+{% endblock %}
+
+

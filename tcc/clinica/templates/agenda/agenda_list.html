@@ -1,0 +1,47 @@
+
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+
+<h5>Exibindo todas as consultas</h5>
+
+<a href="{% url 'agenda_insert' %}">Abrir Horário de Atendimento</a>
+
+<table border="1">
+<thead>
+    <tr>
+    <th>Data e Hora</th>
+    <th>Paciente</th>
+    <th>Status da Consulta</th>
+    <th>Cancelamento</th>
+
+    </tr>
+</thead>
+<tbody>
+    {% for consulta in object_list %}
+    <tr>
+    <td>{{ consulta.dtHoraInicial }}</td>
+    <td>{{ consulta.paciente.user.get_full_name }}</td>
+    <td>{{ consulta.get_situacaoConsulta_display}}</td>
+
+
+
+    <td> 
+            {% if consulta.podeCancelar %}
+        
+            <a href="{% url 'medicoCancelaConsulta'  consulta.id %}">Cancelar</a></td>
+            {% endif %}
+        
+    </tr>
+    {% endfor %}
+</tbody>
+</table>
+
+
+<a href="{% url 'home' %}">Pagina Inicial</a>
+
+
+{% endblock %}

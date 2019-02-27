@@ -1,0 +1,43 @@
+
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<h1>Consultas Disponiveis </h1>
+Para Marcar a Consulta clique no Nome do Médico na data e hora desejada <br/><br/>
+
+<table border="1">
+<thead>
+    <tr>
+    <th>Medico</th>
+    <th>Especialidade</th>
+    <th>Data e Hora</th>
+
+    </tr>
+</thead>
+<tbody>
+    {% for consulta in object_list %}
+    <tr>
+
+
+    
+
+    <td>{{ consulta.medico.user.get_full_name }}</a></td>
+    <td>{{ consulta.medico.especialidade }}</td>
+    <td><a href="{% url 'pacienteConfirmaConsulta' consulta.id %}">{{ consulta.dtHoraInicial }}</a></td>
+    </tr>
+    {% endfor %}
+
+
+</tbody>
+</table>
+
+
+
+<br/><br/>
+<a href="{% url 'home' %}">Pagina Inicial</a>
+
+{% endblock %}
+

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<h1>Confirma {{ form.operacao.value }} da Consulta Abaixo ?  </h1>
+<form method="post">{% csrf_token %}
+<div>
+    <p><strong>Data e horario : </strong> {{ form.dataHora.value }}</p>
+    <p><strong>Numero: </strong> {{ form.consultaId.value }}</p>
+    <p><strong>Medico: </strong>  {{ form.medico.value }}</p>
+    <p><strong>Especialidade: </strong>  {{ form.especialidade.value }}</p>
+    <input type="submit" class="btn btn-success" value="Confirmar" />
+
+
+</div>
+</form>
+{% endblock %}

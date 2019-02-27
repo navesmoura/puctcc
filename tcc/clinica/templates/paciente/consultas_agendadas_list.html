@@ -1,0 +1,45 @@
+
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<h1>Consultas Agendadas </h1>
+
+<table border="1">
+<thead>
+    <tr>
+    <th>Medico</th>
+    <th>Especialidade</th>
+    <th>Data e Hora</th>
+    <th></th>
+
+    </tr>
+</thead>
+<tbody>
+    {% for consulta in object_list %}
+    <tr>
+
+
+    
+
+    <td>{{ consulta.medico.user.get_full_name   }}</a></td>
+    <td>{{ consulta.medico.especialidade }}</td>
+    <td>{{ consulta.dtHoraInicial }}</td>
+    <td><a href="{% url 'pacienteCancelaConsulta' consulta.id %}">Cancelar Consulta</a></td>
+
+    </tr>
+    {% endfor %}
+
+
+</tbody>
+</table>
+
+<a href="{% url 'paciente_marcar_consulta' %}">Marcar Consulta</a>
+
+<br/><br/>
+<a href="{% url 'home' %}">Pagina Inicial</a>
+
+{% endblock %}
+

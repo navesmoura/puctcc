@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="row">
+
+<h5>Consultas Marcadas </h5>
+
+</div>
+<div>
+
+
+<table border="0">
+<thead>
+<tr>
+<th>Data e Hora</th>
+<th>Paciente</th>
+<th>Atender</th>
+</tr>
+</thead>
+<tbody>
+{% for consulta in object_list %}
+<tr>
+<td>{{ consulta.dtHoraInicial }}</td>
+<td>{{ consulta.paciente.user.get_full_name }}</td>
+
+<td><a href="{% url 'consulta_atendimento' consulta.id %}">Atender</a></td>
+
+</tr>
+{% endfor %}
+
+
+</tbody>
+</table>
+</div>
+
+
+<a href="{% url 'home' %}">Pagina Inicial</a>
+{% endblock %}
+

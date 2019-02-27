@@ -1,0 +1,23 @@
+
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<h5>Inclusão de Agenda </h5>
+<p>
+    Instruções: Para abrir a sua agenda informe a Data e Hora Inicial do seu dia de trabalho, a data e hora final e
+    o intervalo entre consultas. o Sistema gerará automaticamente tantas consultas quanto possíveis
+
+
+</p>
+
+<form method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" class="btn btn-success" value="Gerar" />
+</form>
+
+{% endblock %}
+
+
